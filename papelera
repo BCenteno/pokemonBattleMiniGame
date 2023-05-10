@@ -1,0 +1,261 @@
+
+# PLANTA VS AGUA = VENTAJA
+# PLANTA VS FUEGO = DESVENTAJA
+# PLANTA VS ELECTRICO = NORMAL
+# PLANTA VS BICHO = DESVENTAJA
+# PLANTA VS ROCA = VENTAJA
+# AGUA VS PLANTA = DESVENTAJA
+# AGUA VS FUEGO = VENTAJA
+# AGUA VS ELECTRICO = NORMAL
+# AGUA VS BICHO = NORMAL
+# AGUA VS ROCA = VENTAJA
+# FUEGO VS AGUA = DESVENTAJA
+# FUEGO VS ELECTRICO = NORMAL
+# FUEGO VS PLANTA = VENTAJA
+# FUEGO VS BICHO = VENTAJA
+# FUEGO VS ROCA = DESVENTAJA
+# ELECTRICO VS AGUA = VENTAJA
+# ELECTRICO VS FUEGO = NORMAL
+# ELECTRICO VS BICHO = NORMAL
+# ELECTRICO VS ROCA = NORMAL
+# ELECTRICO VS PLANTA = DESVENTAJA
+# BICHO VS AGUA = NORMAL
+# BICHO VS FUEGO = DESVENTAJA
+# BICHO VS PLANTA = VENTAJA
+# BICHO VS ROCA = NORMAL
+# BICHO VS LECTRICO = NORMAL
+# ROCA VS AGUA = NORMAL
+# ROCA VS FUEGO = VENTAJA
+# ROCA VS ELECTRICO = NORMAL
+# ROCA VS BICHO = VENTAJA
+# ROCA VS PLANTA = NORMAL
+
+#     print(f'{entrenador.nombre} VS {rival.nombre}')
+#     while entrenador.salud > 0 and rival.salud > 0:
+
+#         if entrenador.tipo=='agua' and rival.tipo=='fuego':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='fuego' and rival.tipo=='agua':
+#             turno_desventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='fuego' and rival.tipo=='planta':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='planta' and rival.tipo=='fuego':
+#             turno_desventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='planta' and rival.tipo=='agua':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='agua' and rival.tipo=='planta':
+#             turno_desventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='roca' and rival.tipo=='bicho':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='roca' and rival.tipo=='fuego':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='bicho' and rival.tipo=='fuego':
+#             turno_desventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='bicho' and rival.tipo=='planta':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='electrico' and rival.tipo=='planta':
+#             turno_desventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='electrico' and rival.tipo=='agua':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='fuego' and rival.tipo=='roca':
+#             turno_desventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='fuego' and rival.tipo=='bicho':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='agua' and rival.tipo=='roca':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='planta' and rival.tipo=='roca':
+#             turno_ventaja(entrenador,rival,auto)
+#         if entrenador.tipo=='planta' and rival.tipo=='bicho':
+#             turno_desventaja(entrenador,rival,auto)
+#         else:
+#             turno_neutro(entrenador,rival,auto)
+
+
+
+    from lista_pokemon import*
+
+def turno_neutro(entrenador,rival,auto=False):
+
+    if auto: 
+        eleccion_movimiento = random.randint(1, 2 if rival.salud == 100 else 3)
+    else:
+        print(f"\nELEGÍ TU MOVIMIENTO\n1- {entrenador.ataque1}\n2- {entrenador.ataque2}\n3- CURARSE")
+        eleccion_movimiento = int(input("\nElegí tu movimiento: "))
+
+    rival_eleccion_movimiento = random.randint(1, 2 if rival.salud == 100 else 3)
+
+    if eleccion_movimiento == 1:
+        print(f"Elegiste {entrenador.ataque1}. Tu {entrenador.nombre} causa un daño de {entrenador.atacar(rival, eleccion_movimiento)} puntos.")
+
+    if eleccion_movimiento == 2:
+        print(f"Elegiste {entrenador.ataque2}. Tu {entrenador.nombre} causa un daño de {entrenador.atacar(rival, eleccion_movimiento)} puntos.")
+
+    if rival_eleccion_movimiento == 1:
+        print(f"{rival.nombre} eligió {rival.ataque1}. {rival.nombre} te causa un daño de {rival.atacar(entrenador, rival_eleccion_movimiento)} puntos.")
+
+    if rival_eleccion_movimiento == 2:
+        print(f"{rival.nombre} eligió {rival.ataque2}. {rival.nombre} te causa un daño de {rival.atacar(entrenador, rival_eleccion_movimiento)} puntos.")
+
+    if eleccion_movimiento == 3:
+        print(f"Tu {entrenador.nombre} eligió CURARSE y restauró {entrenador.curar()} puntos de salud.")
+
+    if rival_eleccion_movimiento == 3:
+        print(f"Tu {rival.nombre} eligió CURARSE y restauró {rival.curar()} puntos de salud.")
+
+    resultado_turno(entrenador, rival)
+
+    return entrenador, rival
+
+#DEFINO TURNO CON VENTAJA
+def turno_ventaja(entrenador,rival,auto=False):
+    
+    if auto: 
+        eleccion_movimiento = random.randint(1, 2 if rival.salud == 100 else 3)
+    else:
+        print(f"\nELEGÍ TU MOVIMIENTO\n1- {entrenador.ataque1}\n2- {entrenador.ataque2}\n3- CURARSE")
+        eleccion_movimiento = int(input("\nElegí tu movimiento: "))
+    
+    rival_eleccion_movimiento = random.randint(1, 2 if rival.salud == 100 else 3)
+
+    if eleccion_movimiento == 1:
+        print(f"Elegiste {entrenador.ataque1}. Tu {entrenador.nombre} causa un daño de {entrenador.atacar(rival, eleccion_movimiento)} puntos.")
+
+    if eleccion_movimiento == 2:
+        print(f"Elegiste {entrenador.ataque2}. Tu {entrenador.nombre} causa un daño de {entrenador.atacar_ventaja(rival, eleccion_movimiento)} puntos.")
+        print('¡Tu ataque es muy efectivo!')
+
+    if rival_eleccion_movimiento == 1:
+        print(f"{rival.nombre} eligió {rival.ataque1}. {rival.nombre} te causa un daño de {rival.atacar(entrenador, rival_eleccion_movimiento)} puntos.")
+    
+    if rival_eleccion_movimiento == 2:
+        print(f"{rival.nombre} eligió {rival.ataque2}. {rival.nombre} te causa un daño de {rival.atacar_desventaja(entrenador, rival_eleccion_movimiento)} puntos.")
+        print('No es muy efectivo...')
+
+    if eleccion_movimiento == 3:
+        print(f"Tu {entrenador.nombre} eligió CURARSE y restauró {entrenador.curar()} puntos de salud.")
+
+    if rival_eleccion_movimiento == 3:
+        print(f"Tu {rival.nombre} eligió CURARSE y restauró {rival.curar()} puntos de salud.")
+
+    return entrenador, rival
+
+#DEFINO TURNO SIN VENTAJA
+def turno_desventaja(entrenador,rival,auto=False):
+
+    if auto: 
+        eleccion_movimiento = random.randint(1, 2 if rival.salud == 100 else 3)
+    else:
+        print(f"\nELEGÍ TU MOVIMIENTO\n1- {entrenador.ataque1}\n2- {entrenador.ataque2}\n3- CURARSE")
+        eleccion_movimiento = int(input("\nElegí tu movimiento: "))
+
+    rival_eleccion_movimiento = random.randint(1, 2 if rival.salud == 100 else 3)
+
+    if eleccion_movimiento == 1:
+        print(f"Elegiste {entrenador.ataque1}. Tu {entrenador.nombre} causa un daño de {entrenador.atacar(rival, eleccion_movimiento)} puntos.")
+
+    if eleccion_movimiento == 2:
+        print(f"Elegiste {entrenador.ataque2}. Tu {entrenador.nombre} causa un daño de {entrenador.atacar_desventaja(rival, eleccion_movimiento)} puntos.")
+        print('No es muy efectivo...')
+
+    if rival_eleccion_movimiento == 1:
+        print(f"{rival.nombre} eligió {rival.ataque1}. {rival.nombre} te causa un daño de {rival.atacar(entrenador, rival_eleccion_movimiento)} puntos.")
+
+    if rival_eleccion_movimiento == 2:
+        print(f"{rival.nombre} eligió {rival.ataque2}. {rival.nombre} te causa un daño de {rival.atacar_ventaja(entrenador, rival_eleccion_movimiento)} puntos.")
+        print(f'¡El ataque de {rival.nombre} es muy efectivo!')
+
+    if eleccion_movimiento == 3:
+        print(f"Tu {entrenador.nombre} eligió CURARSE y restauró {entrenador.curar()} puntos de salud.")
+
+    if rival_eleccion_movimiento == 3:
+        print(f"Tu {rival.nombre} eligió CURARSE y restauró {rival.curar()} puntos de salud.")
+
+    resultado_turno(entrenador, rival)
+
+    return entrenador, rival
+
+#DEFINO MOSTRAR RESULTADO DE TURNO
+def resultado_turno(entrenador,rival):
+    print(f"La salud de tu {entrenador.nombre} es de {entrenador.salud} puntos")
+    print(f"La salud de {rival.nombre} es de {rival.salud} puntos")
+
+#DEFINO LOOP BATALLA
+def batalla(entrenador,rival,auto=False):
+
+    print(f'{entrenador.nombre} VS {rival.nombre}')
+    while entrenador.salud > 0 and rival.salud > 0:
+
+        if entrenador.tipo=='agua' and rival.tipo=='fuego':
+            turno_ventaja(entrenador,rival,auto)
+        if entrenador.tipo=='fuego' and rival.tipo=='agua':
+            turno_desventaja(entrenador,rival,auto)
+        if entrenador.tipo=='fuego' and rival.tipo=='planta':
+            turno_ventaja(entrenador,rival,auto)
+        if entrenador.tipo=='planta' and rival.tipo=='fuego':
+            turno_desventaja(entrenador,rival,auto)
+        if entrenador.tipo=='planta' and rival.tipo=='agua':
+            turno_ventaja(entrenador,rival,auto)
+        if entrenador.tipo=='agua' and rival.tipo=='planta':
+            turno_desventaja(entrenador,rival,auto)
+        else:
+            turno_neutro(entrenador,rival,auto)
+
+    return entrenador, rival
+
+#DEFINO ELECCION DE MI POKEMON
+def elegir_pokemon(auto=False):
+    if auto:
+        nu=random.randint(1, 6)
+    else:
+        print(f'\nELEGÍ UN POKEMON\n1- {pkm[0].nombre}\n2- {pkm[1].nombre}\n3- {pkm[2].nombre}\n4- {pkm[3].nombre}\n5- {pkm[4].nombre}\n6- {pkm[5].nombre}')
+        nu = int(input("\nELEGÍ UN POKEMON: "))
+    return pkm[nu-1]
+
+#DEFINO ELECCION DE RIVAL
+def elegir_pokemon_rival():
+    nr = random.randint(1, 6)
+    return pkm[nr-1]
+
+#DEFINO INICIAR RONDA
+def ronda():
+    entrenador= elegir_pokemon()
+    print(f'Elegiste a {entrenador.nombre}')
+    rival = elegir_pokemon_rival()
+    print(f'Tu rival eligió a {rival.nombre}')
+    batalla(entrenador,rival)
+    print(f"Tu salud final es {entrenador.salud}")
+    print(f"La salud final de {rival.nombre} es {rival.salud}")
+
+    if entrenador.salud < rival.salud:
+        print("\nPerdiste!")
+    else:
+        print(f"\nLe ganaste a {rival.nombre}!")
+
+    return entrenador, rival
+
+#DEFINO INICIAR BATALLA DE 3 TURNOS
+def batalla_tres_turnos():
+    puntos_entrenador=0
+    puntos_rival=0
+    print('-----------INICIA LA PRIMER BATALLA-----------')
+    entrenador,rival=ronda()
+    if entrenador.salud > rival.salud:
+        puntos_entrenador += 1
+    else:
+        puntos_rival + 1
+    print('----------FINALIZA LA PRIMER BATALLA----------')
+    print('-----------INICIA LA SEGUNDA BATALLA----------')
+    entrenador,rival=ronda()
+    if entrenador.salud > rival.salud:
+        puntos_entrenador += 1
+    else:
+        puntos_rival + 1
+    print('----------FINALIZA LA SEGUNDA BATALLA---------')
+    print('-----------INICIA LA TERCER BATALLA-----------')
+    entrenador,rival=ronda()
+    if entrenador.salud > rival.salud:
+        puntos_entrenador += 1
+    else:
+        puntos_rival + 1
+    print('----------FINALIZA LA TERCER BATALLA----------')
+    print (puntos_entrenador, puntos_rival)
